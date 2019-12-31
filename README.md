@@ -16,4 +16,4 @@ data/test.csv - contains the test dataset.
 data/sampleSubmission.csv - contains the template to submit the solution.
 data/data_description.txt - a text file describing the dataset
 
-In this competition my best score was ????% and I got the position ??? on the leaderboard (_last update: 11/12/2019_).
+In this competition my best score was ?? and I got the position ?? on the leaderboard.
