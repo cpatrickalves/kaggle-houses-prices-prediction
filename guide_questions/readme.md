@@ -2,7 +2,7 @@
 
 It's important to answer some guide-questions before starting any Data Science project.
 
-1. **Which problem do we wanna solve?** Predict house prices based in more than a hundred of aspects (variables).
+1. **Which problem do we want to solve?** Predict house prices based in more than a hundred of aspects (variables).
 
 2. **Why this project is important?** Guide buyers/sellers to pay/demand fair house prices.
 
