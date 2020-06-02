@@ -13,3 +13,4 @@ seaborn==0.10.1
 six==1.15.0
 sklearn==0.0
 threadpoolctl==2.0.0
+pandas-profiling[notebook]
