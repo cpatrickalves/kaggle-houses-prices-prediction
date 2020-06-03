@@ -13,6 +13,9 @@ def clean_data(df):
     Returns:
         pd.DataFrame: the cleaned dataframe.
     """
+
+    #### Please refer to the notebook 1.0-Exploratory-Data-Analysis.ipynb to more details
+
     # Removes columns with missing values issues
     cols_to_be_removed = ['Id', 'PoolQC', 'MiscFeature', 'Alley', 'Fence', 'LotFrontage', 'GarageYrBlt', 'MasVnrArea']
     df.drop(columns=cols_to_be_removed, inplace=True)
