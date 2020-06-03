@@ -68,8 +68,6 @@ def export_model(model, path, name):
     with open(pkl_filename, 'wb') as file:
         pickle.dump(model, file)
 
-    pass
-
 def main():
     train = load_data('../../data/raw/train.csv')
 
