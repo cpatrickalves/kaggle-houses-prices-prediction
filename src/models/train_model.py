@@ -10,22 +10,15 @@ def load_data(dataset_path):
     data = pd.read_csv(dataset_path)
     return data
 
-def find_remove_missing_columns(train_data, test_data):
+def find_remove_missing_columns(train_data):
     missing_val_count_by_column = (train_data.isnull().sum())
     removed_columns_nan = missing_val_count_by_column[missing_val_count_by_column > 0]
 
-    test_missing_val_count_by_column = (test_data.isnull().sum())
-    test_removed_columns_nan = test_missing_val_count_by_column[test_missing_val_count_by_column > 0]
+    train_without_missing_values = train_data.drop(columns=removed_columns_nan.index)
 
-    total_columns_remove_nan = test_removed_columns_nan + removed_columns_nan
+    return train_without_missing_values
 
-    train_without_missing_values = train_data.drop(columns=total_columns_remove_nan.index)
-
-    test_without_missing_values = test_data.drop(columns=total_columns_remove_nan.index)
-
-    return train_without_missing_values, test_without_missing_values
-
-def remove_columns_small_correlation(train_data, test_data):
+def remove_columns_small_correlation(train_data):
     corr_matrix = train_data.corr()
 
     correlations = corr_matrix["SalePrice"]
@@ -33,11 +26,10 @@ def remove_columns_small_correlation(train_data, test_data):
     uncorrelated_columns = correlations[correlations < 0.3]
 
     train_data = train_data.drop(columns=uncorrelated_columns.index)
-    test_data = test_data.drop(columns=uncorrelated_columns.index)
 
-    return train_data, test_data
+    return train_data
 
-def encode_categorical_columns(train_data, test_data):
+def encode_categorical_columns(train_data):
     categorical_mask = train_data.dtypes==object
 
     categorical = train_data.columns[categorical_mask].tolist()
@@ -46,22 +38,14 @@ def encode_categorical_columns(train_data, test_data):
 
     train_data[categorical] = train_data[categorical].apply(lambda col: le.fit_transform(col))
 
-    test_categorical_mask = test_data.dtypes==object
+    return train_data
 
-    test_categorical = test_data.columns[test_categorical_mask].tolist()
+def clean_data(train_data):
+    train_data = find_remove_missing_columns(train_data)
+    train_data = remove_columns_small_correlation(train_data)
+    train_data = encode_categorical_columns(train_data)
 
-    le_test = LabelEncoder()
-
-    test_data[test_categorical] = test_data[test_categorical].apply(lambda col: le_test.fit_transform(col))
-
-    return train_data, test_data
-
-def clean_data(train_data, test_data):
-    train_data, test_data = find_remove_missing_columns(train_data, test_data)
-    train_data, test_data = remove_columns_small_correlation(train_data, test_data)
-    train_data, test_data = encode_categorical_columns(train_data, test_data)
-
-    return train_data, test_data
+    return train_data
 
 def save_data(dataframe, path, name):
     dataframe.to_csv(os.path.join(path, name))
@@ -88,9 +72,8 @@ def export_model(model, path, name):
 
 def main():
     train = load_data('../../data/raw/train.csv')
-    test = load_data('../../data/raw/test.csv')
 
-    train, test = clean_data(train, test)
+    train = clean_data(train)
 
     x_train = train.drop(columns=['SalePrice'])
     y_train = train['SalePrice']
