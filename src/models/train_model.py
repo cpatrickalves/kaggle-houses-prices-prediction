@@ -6,10 +6,9 @@ from sklearn.tree import DecisionTreeRegressor
 import os
 import pickle
 
-def load_data(dataset_path, test_path):
-    train = pd.read_csv(dataset_path)
-    test = pd.read_csv(dataset_path)
-    return train, test
+def load_data(dataset_path):
+    data = pd.read_csv(dataset_path)
+    return data
 
 def find_remove_missing_columns(train_data, test_data):
     missing_val_count_by_column = (train_data.isnull().sum())
@@ -88,7 +87,9 @@ def export_model(model, path, name):
     pass
 
 def main():
-    train, test = load_data('../../data/raw/train.csv', '../../data/raw/test.csv')
+    train = load_data('../../data/raw/train.csv')
+    test = load_data('../../data/raw/test.csv')
+
     train, test = clean_data(train, test)
 
     x_train = train.drop(columns=['SalePrice'])
