@@ -6,17 +6,14 @@ from sklearn.tree import DecisionTreeRegressor
 import os
 import pickle
 
+import sys
+sys.path.append('../')
+
+from data import pre_processing
+
 def load_data(dataset_path):
     data = pd.read_csv(dataset_path)
     return data
-
-def find_remove_missing_columns(train_data):
-    missing_val_count_by_column = (train_data.isnull().sum())
-    removed_columns_nan = missing_val_count_by_column[missing_val_count_by_column > 0]
-
-    train_without_missing_values = train_data.drop(columns=removed_columns_nan.index)
-
-    return train_without_missing_values
 
 def remove_columns_small_correlation(train_data):
     corr_matrix = train_data.corr()
@@ -40,8 +37,8 @@ def encode_categorical_columns(train_data):
 
     return train_data
 
-def clean_data(train_data):
-    train_data = find_remove_missing_columns(train_data)
+def prepare_data(train_data):
+    train_data = pre_processing.clean_data(train_data)
     train_data = remove_columns_small_correlation(train_data)
     train_data = encode_categorical_columns(train_data)
 
@@ -71,7 +68,7 @@ def export_model(model, path, name):
 def main():
     train = load_data('../../data/raw/train.csv')
 
-    train = clean_data(train)
+    train = prepare_data(train)
 
     x_train = train.drop(columns=['SalePrice'])
     y_train = train['SalePrice']
@@ -82,7 +79,9 @@ def main():
 
     print(rmse)
 
-    export_model(model, './', 'tree_model')
+    export_model(model, './', 'tree_model.pkl')
+    
+    save_data(x_train.head(5), './', 'test_input.csv')
 
 if __name__ == '__main__':
     main()
