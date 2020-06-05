@@ -45,7 +45,7 @@ def prepare_data(train_data):
     return train_data
 
 def save_data(dataframe, path, name):
-    dataframe.to_csv(os.path.join(path, name))
+    dataframe.to_csv(os.path.join(path, name), index=False)
 
 def train_model(x_train, y_train):
     tree_reg = DecisionTreeRegressor()
