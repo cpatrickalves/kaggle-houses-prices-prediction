@@ -23,9 +23,9 @@ def load_model(path, name):
     return pickle_model
 
 def main():
-    model_pkl = load_model('./', 'tree_model.pkl')
+    model_pkl = load_model('../../models/', 'tree_model.pkl')
     model = HousePriceModel(model_pkl)
-    test = load_data('./test_input.csv')
+    test = load_data('../../models/test_input.csv')
     print(model.predict(test.to_dict()))
 
 if __name__ == '__main__':

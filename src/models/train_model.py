@@ -79,9 +79,9 @@ def main():
 
     print(rmse)
 
-    export_model(model, './', 'tree_model.pkl')
+    export_model(model, '../../models/', 'tree_model.pkl')
     
-    save_data(x_train.head(5), './', 'test_input.csv')
+    save_data(x_train.head(5), '../../models/', 'test_input.csv')
 
 if __name__ == '__main__':
     main()
