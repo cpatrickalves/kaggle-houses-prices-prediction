@@ -1,6 +1,10 @@
 from starlette.testclient import TestClient
 from api import app
 import requests
+import sys
+sys.path.append('../')
+from models.predict import HousePriceModel
+
 
 client = TestClient(app)
 
@@ -9,15 +13,21 @@ def test_root():
     assert response.status_code == 200
     assert response.json() == {"status": "online"}
 
-def test_predict():
-    response = client.post(
-        "/predict",
-        json={"SaleType": "foobar",
-              "OpenPorchSF": "Foo Bar",
-              "SaleCondition": "The Foo Bar"},
-    )
+def test_predict(): #FIXME: there is a warning in this test
+    """Send a request to the API using a sample from the model
+       and evaluates the response.
+    """
+    model_dir = 'tree_model'
+    # set the model saved at models
+    model = HousePriceModel(model_dir)
+
+    # Get one input example as dict
+    test_df = model.get_input_example()
+    sample_input = test_df.to_dict(orient='records')[0]
+
+    response = client.post("/predict",json=sample_input)
     assert response.status_code == 200
-    assert response.json() == {"SalesPrice": 42}
+    assert response.json() == {"Prediction":208500.0} #FIXME: generalizar esse valor
 
 
 def run_prediction_from_sample(model_dir):
@@ -28,17 +38,17 @@ def run_prediction_from_sample(model_dir):
     """
 
     # set the model saved at models
-    #logger.info(f"Loading model: {model_dir}")
-    #model = HousePriceModel(model_dir)
+    print(f"Loading model: {model_dir}")
+    model = HousePriceModel(model_dir)
 
     # Get one input example as dict
-    #test_df = model.get_input_example()
-    #sample_input = test_df.to_dict(orient='records')[0]
+    test_df = model.get_input_example()
+    sample_input = test_df.to_dict(orient='records')[0]
 
     # Run send a predict request with the sample
     url="http://127.0.0.1:8000/predict"
     headers = {"Content-Type": "application/json", "Accept":"text/plain"}
-    sample_input = {"SaleType": "Somevalue01", "WoodDeckSF": "42", "SaleCondition":22}
+
     response = requests.post(url, headers=headers, json=sample_input)
     print(response.text)
 

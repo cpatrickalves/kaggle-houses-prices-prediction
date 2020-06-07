@@ -6,7 +6,7 @@ from typing import Dict
 import json
 import sys
 sys.path.append('../')
-from models import predict
+from models.predict import HousePriceModel
 
 
 # ------------------------ HOW TO USE ------------------------ #
@@ -42,21 +42,23 @@ def root():
 
 @app.post("/predict")
 def predict(inputs: dict):
+    """Perform a prediction using data from a POST
 
-    #logger.info(f"API - POST /predict: \n {json.dumps(inputs, indent=4)}")
+    Args:
+        inputs (json): input data in JSON format
+
+    Returns:
+        json: predict value as a JSON object
+    """
+
+    logger.info(f"API - POST /predict: \n {json.dumps(inputs, indent=4)}")
 
     # set the model saved at models/
     model_dir = 'tree_model'
 
-    #print(f"Loading model: {model_dir}")
-    #model = HousePriceModel(model_dir)
+    logger.info(f"Loading model: {model_dir}")
+    model = HousePriceModel(model_dir)
 
-    # Get one input example as dict
-    #test_df = model.get_input_example()
-    #sample_input = test_df.to_dict(orient='records')[0]
+    response = {"Prediction": model.predict(inputs)[0]}
 
-    #input_features = model.get_input_features()
-    #response = f"Prediction: {model.predict(sample_input)}")
-
-    #return response
-    return inputs
+    return response
