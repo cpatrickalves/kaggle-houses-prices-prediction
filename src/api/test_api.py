@@ -1,5 +1,6 @@
 from starlette.testclient import TestClient
 from api import app
+<<<<<<< HEAD
 import requests
 import sys
 sys.path.append('../')
@@ -55,3 +56,16 @@ def run_prediction_from_sample(model_dir):
 
 if __name__ == "__main__":
     run_prediction_from_sample('tree_model')
+=======
+
+client = TestClient(app)
+
+def test_status_code():
+    response = client.get("/")
+    assert response.status_code == 200
+
+def test_status_response():
+    response = client.get("/")
+    assert response.json() == {"status": "online"}
+
+>>>>>>> 6a9accfb8aa8313c30c60eb859250210e00faa84

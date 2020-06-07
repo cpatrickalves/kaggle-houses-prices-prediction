@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import pandas as pd
 from logzero import logger
+<<<<<<< HEAD
 from pydantic import BaseModel
 from typing import Dict
 import json
@@ -8,6 +9,8 @@ import sys
 sys.path.append('../')
 from models.predict import HousePriceModel
 
+=======
+>>>>>>> 6a9accfb8aa8313c30c60eb859250210e00faa84
 
 # ------------------------ HOW TO USE ------------------------ #
 # To see API documentation, start the API and access:
@@ -19,6 +22,7 @@ from models.predict import HousePriceModel
 
 app = FastAPI()
 
+<<<<<<< HEAD
 logger.info("API started")
 
 #TODO: Use BaseModel for automatic validation
@@ -34,11 +38,16 @@ logger.info("API started")
 
 @app.get("/")
 def root():
+=======
+@app.get("/")
+def api_status():
+>>>>>>> 6a9accfb8aa8313c30c60eb859250210e00faa84
     """
     Root view returns the system status
     """
     return {"status": "online"}
 
+<<<<<<< HEAD
 
 @app.post("/predict")
 def predict(inputs: dict):
@@ -62,3 +71,5 @@ def predict(inputs: dict):
     response = {"Prediction": model.predict(inputs)[0]}
 
     return response
+=======
+>>>>>>> 6a9accfb8aa8313c30c60eb859250210e00faa84
