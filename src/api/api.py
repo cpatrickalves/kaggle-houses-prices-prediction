@@ -19,7 +19,6 @@ from models.predict import HousePriceModel
 
 app = FastAPI()
 
-
 logger.info("API started")
 
 #TODO: Use BaseModel for automatic validation

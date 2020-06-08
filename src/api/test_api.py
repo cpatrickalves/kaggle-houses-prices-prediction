@@ -13,7 +13,8 @@ def test_root():
     assert response.status_code == 200
     assert response.json() == {"status": "online"}
 
-def test_predict(): #FIXME: there is a warning in this test
+
+def test_predict(): #FIXME: there is a warning in this test (numpy.ufunc size changed), I can't figure out how to fix it.
     """Send a request to the API using a sample from the model
        and evaluates the response.
     """
@@ -27,7 +28,7 @@ def test_predict(): #FIXME: there is a warning in this test
 
     response = client.post("/predict",json=sample_input)
     assert response.status_code == 200
-    assert response.json() == {"Prediction":208500.0} #FIXME: generalizar esse valor
+    assert response.json() == {"Prediction":208500.0} #FIXME: create a general reponse {"Prediction": float}
 
 
 def run_prediction_from_sample(model_dir):
