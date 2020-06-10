@@ -1,11 +1,11 @@
-# Third-paty
+import os
+import settings
 import pandas as pd
 import streamlit as st
-# Project
-from models import predict
+from src.models import predict
 
-model = predict.HousePriceModel(r'C:\Users\84554037\Dropbox\ds_pratica\kaggle-houses-prices-prediction\models\tree_model')
 
+model = predict.HousePriceModel(os.path.join(settings.MODELS_FOLDER, 'tree_model'))
 
 # Sidebar
 st.sidebar.title('Input')

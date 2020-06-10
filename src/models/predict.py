@@ -1,10 +1,12 @@
 import pickle
 import os
 import pandas as pd
+import settings
+
 
 class HousePriceModel():
 
-    def __init__(self, model_dir, models_path='../../models'):
+    def __init__(self, model_dir, models_path=settings.MODELS_FOLDER):
         """Create the HousePriceModel object
 
         Args:

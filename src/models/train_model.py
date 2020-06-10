@@ -5,9 +5,8 @@ from sklearn.metrics import mean_squared_error
 from sklearn.tree import DecisionTreeRegressor
 import os
 import pickle
-import sys
-sys.path.append('../')
-from data import pre_processing
+from src.data import pre_processing
+import settings
 
 
 def load_data(dataset_path):
@@ -61,14 +60,14 @@ def accuracy(model, x_test, y_test):
     return tree_rmse
 
 
-def export_model(model, inputs_df, output_dir='last_model', path='../../models/'):
+def export_model(model, inputs_df, output_dir='last_model', path=settings.MODELS_FOLDER):
     """Saves model as PKL file and an example of the input data as a CSV file
 
     Args:
         model (object): trained model
         inputs_df (DataFrame): a dataframe with a set of examples
         output_dir (str, optional): The directory where the files should be saved. Defaults to 'last_model'.
-        path (str, optional): path where the output_dir should be created. Defaults to '../../models/'.
+        path (str, optional): path where the output_dir should be created. Defaults to settings.MODELS_FOLDER.
     """
 
     # Create directory if not exist
@@ -91,7 +90,8 @@ def export_model(model, inputs_df, output_dir='last_model', path='../../models/'
 def main():
     print("-"*20, "Starting", "-"*20)
     # Load data
-    train = load_data('../../data/raw/train.csv')
+    train_data = os.path.join(settings.RAW_DATA_FOLDER, 'train.csv')
+    train = load_data(train_data)
     train = prepare_data(train)
 
     # Split train test

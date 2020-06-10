@@ -1,6 +1,5 @@
-# Built-in
 import os
-# Third-party
+import settings
 import pandas as pd
 
 
@@ -37,12 +36,13 @@ def clean_data(df):
     df['Electrical'].fillna('SBrkr', inplace=True)
 
     # Saves a copy
-    df.to_csv('../../data/processed/train-cleaned.csv')
+    cleaned_data = os.path.join(settings.PROCESSED_DATA_FOLDER, 'train-cleaned.csv')
+    df.to_csv(cleaned_data)
 
     return df
 
 if __name__ == "__main__":
-    train_file = '../../data/raw/train.csv'
+    train_file = os.path.join(settings.RAW_DATA_FOLDER, 'train.csv')
     if os.path.exists(train_file):
         df = pd.read_csv(train_file)
         print('Raw::', df.shape)
