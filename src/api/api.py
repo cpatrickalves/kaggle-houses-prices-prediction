@@ -9,14 +9,6 @@ sys.path.append('../')
 from models.predict import HousePriceModel
 
 
-# ------------------------ HOW TO USE ------------------------ #
-# To see API documentation, start the API and access:
-# <IPADDRESS>:8000/docs
-# or
-# <IPADDRESS>:8000/redoc
-# or
-# <IPADDRESS>:8000/openapi.json
-
 app = FastAPI()
 
 logger.info("API started")
