@@ -16,6 +16,7 @@ sklearn = "*"
 uvicorn = "*"
 fastapi = "*"
 logzero = "*"
+streamlit = "*"
 
 [requires]
 python_version = "3.7"
