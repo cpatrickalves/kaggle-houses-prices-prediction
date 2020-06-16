@@ -2,9 +2,11 @@
 import pandas as pd
 import streamlit as st
 # Project
+import sys
+sys.path.append('..')
 from models import predict
 
-model = predict.HousePriceModel(r'C:\Users\84554037\Dropbox\ds_pratica\kaggle-houses-prices-prediction\models\tree_model')
+model = predict.HousePriceModel(r'tree_model')
 
 
 # Sidebar
