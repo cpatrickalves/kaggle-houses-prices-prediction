@@ -4,10 +4,9 @@ from fastapi import FastAPI
 import pandas as pd
 from logzero import logger
 import json
-from src.models.predict import HousePriceModel
-from src.api_models import PredictReponse
-from src.models.predict import HousePriceModel
 from typing import Dict
+from src.api.api_models import PredictReponse
+from src.models.predict import HousePriceModel
 from datetime import datetime
 
 
