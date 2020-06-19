@@ -1,28 +1,17 @@
+import os
+import settings
 from fastapi import FastAPI
 import pandas as pd
 from logzero import logger
 from pydantic import BaseModel
 from typing import Dict
 import json
-import sys
-sys.path.append('../')
-from models.predict import HousePriceModel
+from src.models.predict import HousePriceModel
 
 
 app = FastAPI()
 
 logger.info("API started")
-
-#TODO: Use BaseModel for automatic validation
-#class JsonBody(BaseModel):
-#    name: str
-
-# Create a Basemodel from dict?
-#class ModelInputs(BaseModel):
-#    SaleType : str = None
-#    OpenPorchSF : str = None
-#    WoodDeckSF : str = None
-#    SaleCondition : str = None
 
 @app.get("/")
 def root():

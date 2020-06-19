@@ -14,6 +14,7 @@ class HousePriceModel():
             models_path (str): path to models directory
         """
         self.path = os.path.join(models_path, model_dir)
+        print('------', self.path)
         self.model = self.load_model()
         self.preds = None
 
@@ -42,6 +43,7 @@ class HousePriceModel():
             Dataframe: a dataframe with a set of examples
         """
         input_template = os.path.join(self.path, "test_input.csv")
+        print(input_template)
         input_example = pd.read_csv(input_template)
 
         return input_example
