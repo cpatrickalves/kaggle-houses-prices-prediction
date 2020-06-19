@@ -99,12 +99,31 @@ After installing Python, add the required package using pip installer:
 pip install -r requirements.txt
 ```
 
+If you are using Pipenv:
+```
+pipenv install 
+```
+
 ### Usage
 
 To run the application, execute:
 ```
 python app.py
 ```
+
+#### For developers
+
+If you are usin Pipenv, there are some packages used specific for development (ex: pytest)
+To install them use:
+```
+pipenv install --dev
+```
+Then, run pytest to make sure everything is fine.
+```
+pytest
+```
+
+
 
 #### Example
 

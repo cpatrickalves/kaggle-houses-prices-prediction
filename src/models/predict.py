@@ -30,7 +30,8 @@ class HousePriceModel():
         return pickle_model
 
     def predict(self, data):
-        dataDF = pd.DataFrame.from_dict(data)
+
+        dataDF = pd.DataFrame(data, index=[0])
         self.preds = self.model.predict(dataDF)
         return self.preds
 
