@@ -1,9 +1,7 @@
 from starlette.testclient import TestClient
 from api import app
 import requests
-import sys
-sys.path.append('../')
-from models.predict import HousePriceModel
+from src.models.predict import HousePriceModel
 
 
 client = TestClient(app)
