@@ -28,7 +28,7 @@ It's important to answer some guide-questions before starting any Data Science p
  - Primary metrics: Clients that use the service / total clients
  - Secondary metrics: Increase in revenue after activating the service.
 
-8. **Which is the metric to evaluate the model?** To measure the performance between developed models, we will use Root Mean Squared Logarithmic Error (RMSLE).
+8. **Which is the metric to evaluate the model?** To measure the performance between developed models, we will use [Root Mean Squared Logarithmic Error (RMSLE)](https://www.kaggle.com/c/ashrae-energy-prediction/discussion/113064) and the goal is to reach a **RMSLE lower than 0.1**.
 
 # Team
 
