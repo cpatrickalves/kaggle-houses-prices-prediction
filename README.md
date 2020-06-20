@@ -45,9 +45,10 @@ Project Organization
     ├── LICENSE
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
+    │   ├── from_kaggle    <- original files from kaggle website.
     │   ├── submission     <- template to submit the solution to Kaggle.
     │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   └── raw            <- The original "train.csv" data from Kaggle splitted in train and test.
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
