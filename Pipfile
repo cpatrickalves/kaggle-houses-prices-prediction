@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 requests = "*"
+jupyterlab = "*"
 
 [packages]
 pandas = "==1.0.4"
@@ -49,6 +50,7 @@ wcwidth = "==0.2.3"
 websockets = "==8.1"
 zipp = "==3.1.0"
 pandas-profiling = {extras = ["notebook"], version = "*"}
+pycaret = "*"
 
 [requires]
 python_version = "3.7"
