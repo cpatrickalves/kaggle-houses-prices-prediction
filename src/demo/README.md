@@ -1,10 +1,10 @@
-# How to see the Proof of Concept (POC)
+# Project Demo
 
-To see the POC (a streamlit app), please:
+To see the demonstration of the model as a web application, please:
 
 1. Install streamlit using requirements.txt or pipenv.
-2. Run models/train_model.py to create an pkl file in tree_model.
-3. On poc folder, type:
+2. Run models/train_model.py to create a pkl file in tree_model.
+3. On `src/demo` folder, type:
 ```
 $ streamlit run app.py
 ```
