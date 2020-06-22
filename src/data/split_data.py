@@ -24,8 +24,8 @@ def create_train_test_data(path_to_csv=None):
     data_train.to_csv(os.path.join(settings.RAW_DATA_FOLDER, 'train.csv'), index=False)
     data_test.to_csv(os.path.join(settings.RAW_DATA_FOLDER, 'test.csv'), index=False)
 
-    print("Train data for modeling: " + str(data_train.shape))
-    print("Test data for predictions: " + str(data_test.shape))
+    print(f"Train data for modeling: {data_train.shape}")
+    print(f"Test data for predictions: {data_test.shape}")
 
 
 if __name__ == "__main__":
