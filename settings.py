@@ -7,6 +7,7 @@ DATA_FOLDER = os.path.join(ROOT_FOLDER, 'data')
 RAW_DATA_FOLDER = os.path.join(DATA_FOLDER, 'raw')
 PROCESSED_DATA_FOLDER = os.path.join(DATA_FOLDER, 'processed')
 SBMISSION_DATA_FOLDER = os.path.join(DATA_FOLDER, 'submission')
+REPORTS_FOLDER = os.path.join(ROOT_FOLDER, 'reports')
 # Models
 MODELS_FOLDER = os.path.join(ROOT_FOLDER, 'models')
 

@@ -32,8 +32,10 @@ class HousePriceModel():
 
     def predict(self, data):
 
-        dataDF = pd.DataFrame(data, index=[0])
-        self.preds = self.model.predict(dataDF)
+        if not isinstance(data, pd.DataFrame):
+            data = pd.DataFrame(data, index=[0])
+
+        self.preds = self.model.predict(data)
         return self.preds
 
     def get_input_example(self):
