@@ -6,7 +6,9 @@ ROOT_FOLDER = os.getcwd()
 DATA_FOLDER = os.path.join(ROOT_FOLDER, 'data')
 RAW_DATA_FOLDER = os.path.join(DATA_FOLDER, 'raw')
 PROCESSED_DATA_FOLDER = os.path.join(DATA_FOLDER, 'processed')
-SBMISSION_DATA_FOLDER = os.path.join(DATA_FOLDER, 'submission')
+SUBMISSION_DATA_FOLDER = os.path.join(DATA_FOLDER, 'submission')
+KAGGLE_DATA_FOLDER = os.path.join(DATA_FOLDER, 'from_kaggle')
+
 # Models
 MODELS_FOLDER = os.path.join(ROOT_FOLDER, 'models')
 
