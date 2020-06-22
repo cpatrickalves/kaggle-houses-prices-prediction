@@ -5,7 +5,10 @@ import pandas as pd
 import sklearn.metrics as metrics
 from src.models.predict import HousePriceModel
 from src.models.train_model import prepare_data
+<<<<<<< HEAD
 from src.data.pre_processing import clean_data
+=======
+>>>>>>> 5c2e135... Compute metrics for all models
 import numpy as np
 
 
@@ -40,7 +43,11 @@ def evaluate_model(model_name: str, data: pd.DataFrame) -> dict:
     data = clean_data(data, output_file='test-cleaned.csv')
 
     # Get inputs and target
-    X_test = data[model.get_input_features()]
+    features = model.get_input_features()
+    data = prepare_data(data)
+
+    # Get inputs and target
+    X_test = data[features]
     y_test = data['SalePrice']
 
     # Perform predictions and compute metrics
