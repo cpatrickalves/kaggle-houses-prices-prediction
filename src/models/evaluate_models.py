@@ -5,7 +5,10 @@ import pandas as pd
 import sklearn.metrics as metrics
 from src.models.predict import HousePriceModel
 from src.models.train_model import prepare_data
+<<<<<<< HEAD
 from src.data.pre_processing import clean_data
+=======
+>>>>>>> 5c2e1351a4bfdd4f87883515cb47f9f2adfbe125
 import numpy as np
 
 
