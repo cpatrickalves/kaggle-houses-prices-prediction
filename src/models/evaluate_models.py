@@ -5,6 +5,7 @@ import pandas as pd
 import sklearn.metrics as metrics
 from src.models.predict import HousePriceModel
 from src.models.train_model import prepare_data
+from src.data.pre_processing import clean_data
 import numpy as np
 
 
@@ -36,11 +37,10 @@ def evaluate_model(model_name: str, data: pd.DataFrame) -> dict:
 
     # Load models, and prepare the data
     model = HousePriceModel(model_name)
-    features = model.get_input_features()
-    data = prepare_data(data)
+    data = clean_data(data, output_file='test-cleaned.csv')
 
     # Get inputs and target
-    X_test = data[features]
+    X_test = data[model.get_input_features()]
     y_test = data['SalePrice']
 
     # Perform predictions and compute metrics
@@ -59,7 +59,7 @@ def evaluate_model(model_name: str, data: pd.DataFrame) -> dict:
 
 if __name__ == "__main__":
 
-    test_df = pd.read_csv(os.path.join(settings.RAW_DATA_FOLDER, 'train.csv'))
+    test_df = pd.read_csv(os.path.join(settings.RAW_DATA_FOLDER, 'test.csv'))
     results_df = pd.DataFrame(columns=['Model', 'MAE', 'MSE', 'RMSE', 'R2', 'RMSLE', 'MAPE'])
 
     models = os.listdir(settings.MODELS_FOLDER)

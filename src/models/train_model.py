@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_squared_error
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.pipeline import Pipeline
 import os
 import pickle
 from src.data import pre_processing
@@ -24,32 +25,26 @@ def remove_columns_small_correlation(train_data):
     return train_data
 
 
-def encode_categorical_columns(train_data):
-    categorical_mask = train_data.dtypes==object
-    categorical = train_data.columns[categorical_mask].tolist()
-    le = LabelEncoder()
-    train_data[categorical] = train_data[categorical].apply(lambda col: le.fit_transform(col))
-
-    return train_data
-
-
 def prepare_data(train_data):
     print(f"Performing data cleaning ...")
     train_data = pre_processing.clean_data(train_data)
     print(f"Performing feature selection ...")
     train_data = remove_columns_small_correlation(train_data)
-    print(f"Performing data pre-processing ...")
-    train_data = encode_categorical_columns(train_data)
 
     return train_data
 
 
 def train_model(x_train, y_train):
-    print("Training the model ...")
-    tree_reg = DecisionTreeRegressor()
-    tree_reg.fit(x_train, y_train)
 
-    return tree_reg
+    print("Training the model ...")
+
+    model = Pipeline(steps=[
+        ("label encoding", OneHotEncoder(handle_unknown='ignore')),
+        ("tree model", DecisionTreeRegressor())
+    ])
+    model.fit(x_train, y_train)
+
+    return model
 
 
 def accuracy(model, x_test, y_test):
