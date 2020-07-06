@@ -26,7 +26,7 @@ def test_predict(): #FIXME: there is a warning in this test (numpy.ufunc size ch
 
     response = client.post("/predict",json=sample_input)
     assert response.status_code == 200
-    assert response.json() == {"Prediction":208500.0} #FIXME: create a general reponse {"Prediction": float}
+    assert response.json() == {"Prediction":154500.0} #FIXME: create a general reponse {"Prediction": float}
 
 
 def run_prediction_from_sample(model_dir):

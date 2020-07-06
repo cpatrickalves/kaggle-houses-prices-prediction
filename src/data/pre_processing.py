@@ -3,7 +3,7 @@ import settings
 import pandas as pd
 
 
-def clean_data(df):
+def clean_data(df, output_file='train-cleaned.csv'):
     """Makes an initial clean in a dataframe.
 
     Args:
@@ -36,7 +36,7 @@ def clean_data(df):
     df['Electrical'].fillna('SBrkr', inplace=True)
 
     # Saves a copy
-    cleaned_data = os.path.join(settings.PROCESSED_DATA_FOLDER, 'train-cleaned.csv')
+    cleaned_data = os.path.join(settings.PROCESSED_DATA_FOLDER, output_file)
     df.to_csv(cleaned_data)
 
     return df
