@@ -3,14 +3,15 @@ import settings
 from fastapi import FastAPI
 import pandas as pd
 from logzero import logger
-from pydantic import BaseModel
-from typing import Dict
 import json
 from src.models.predict import HousePriceModel
+from src.api_models import PredictReponse
+from src.models.predict import HousePriceModel
+from typing import Dict
+from datetime import datetime
 
 
 app = FastAPI()
-
 logger.info("API started")
 
 @app.get("/")
@@ -21,7 +22,7 @@ def root():
     return {"status": "online"}
 
 
-@app.post("/predict")
+@app.post("/predict", response_model=PredictReponse)
 def predict(inputs: dict):
     """Perform a prediction using data from a POST
 
@@ -40,6 +41,13 @@ def predict(inputs: dict):
     logger.info(f"Loading model: {model_dir}")
     model = HousePriceModel(model_dir)
 
-    response = {"Prediction": model.predict(inputs)[0]}
+
+    start = datetime.today()
+    pred = model.predict(inputs)[0]
+    dur = (datetime.today() - start).total_seconds()
+
+    # Create response object
+    response = PredictReponse(prediction=pred, duration=dur)
+
 
     return response
