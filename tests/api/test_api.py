@@ -1,6 +1,9 @@
 from starlette.testclient import TestClient
-from api import app
+from src.api.api import app
 import requests
+import pytest
+import sys
+from src.api.api_models import PredictReponse
 from src.models.predict import HousePriceModel
 
 
@@ -26,7 +29,14 @@ def test_predict(): #FIXME: there is a warning in this test (numpy.ufunc size ch
 
     response = client.post("/predict",json=sample_input)
     assert response.status_code == 200
-    assert response.json() == {"Prediction":154500.0} #FIXME: create a general reponse {"Prediction": float}
+
+    # Check if the response has the right data types
+    try:
+        response_schema = PredictReponse(**response.json())
+    except:
+        response_schema = None
+
+    assert isinstance(response_schema, PredictReponse)
 
 
 def run_prediction_from_sample(model_dir):
